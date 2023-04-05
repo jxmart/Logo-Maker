@@ -28,48 +28,51 @@ const express = require('express');
 const path = require('path');
 const files = require('fs')
 
-class Svg {
-    constructor() {
-        this.textElement = '';
-        this.shapeElement = '';
-    }
-    render() {
-        return `svg version = '1.1` xmlns =
-    }
-    setTextElement(text, color) {
-        this.textElement = <text x='150'
-    }
-}
+// class Svg {
+//     constructor() {
+//         this.textElement = '';
+//         this.shapeElement = '';
+//     }
+//     render() {
+//         return `svg version = '1.1` xmlns =
+//     }
+//     setTextElement(text, color) {
+//         this.textElement = `<text x='150' y='125' font-size='30' fill='${color}'>${this.textElement}
+//     }
+// }
 
 
-const app = express();
+const app = express()
 
 const questions = [
 {
     type: 'input',
-    name: 'text'
+    name: 'text',
+    message: 'Enter three characters or less', 
+    validate: (textChoice) =>
+    textChoice.length <= 3 || 'Text must be 3 characters or less'
+},
+
+{
+    type: 'input',
+    name: 'text-color',
+    message: 'Choose a text color or hexadecimal number:' 
+},
+
+{
+    type: 'input',
+    name: 'shape-color',
     message: 'Enter three characters or less' 
 }
 
 {
-    type: 'input',
-    name: 'text'
-    message: 'Enter three characters or less' 
-}
-
-{
-    type: 'input',
-    name: 'text'
-    message: 'Enter three characters or less' 
-}
-
-{
-    type: 'input',
-    name: 'text'
-    message: 'Enter three characters or less' 
+    type: 'list',
+    name: 'shape',
+    message: 'Chose a shape',
+    choices: ('Circle', 'Sqaure', 'Triangle')
 }
 ]
 
-const shape = new Triangle();
-shape.setColor("blue");
-expect(shape.render()).toEqual('<polygon points="150, 18 244, 182 56, 182" fill="blue" />');
+// const shape = new Triangle();
+// shape.setColor("blue");
+// expect(shape.render()).toEqual('<polygon points="150, 18 244, 182 56, 182" fill="blue" />');
