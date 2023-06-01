@@ -13,20 +13,11 @@
 // WHEN I open the `logo.svg` file in a browser
 // THEN I am shown a 300x200 pixel image that matches the criteria I entered
 
-
-// ├── examples/           // Example svg file(s) created with the app
-// ├── lib/                // Folder for classes or functions
-//     ├── shapes.js       // Exports `Triangle`, `Circle`, and `Square` classes
-//     ├── shapes.test.js  // Jest tests for shapes
-//     └── more...         // Additional files and tests
-// ├── .gitignore          // Indicates which folders and files Git should ignore
-// ├── index.js            // Runs the application using imports from lib/
-// ├── package.json
-// └── README.md           // App description, link to video, setup and usage instructions   
-
 const express = require('express');
 const path = require('path');
 const files = require('fs')
+const {Circle, Square, Triangle} = require('./lib/shapes')
+
 
 // class Svg {
 //     constructor() {
@@ -73,6 +64,38 @@ const questions = [
 }
 ]
 
+function writeFile(fileName, data) {
+    files.writeFile(fileName, data, (err) => {
+        if (err) throw error
+    })
+}
+async function init() {
+    let svgString;
+    const answers = await inquirer.prompt(questions)
+    const shapeColor = answers.shapeColor
+    const textColor = answers.textColor
+    let userText
+
+    if (answers.text.length > 0 && answers.text.length < 4) {
+        userText = answers.text
+    } else {
+        console.log('Invalid! Input must be three characters or less')
+        return
+    }
+
+    let userShape
+    if (answers.shape === 'circle') {
+        userShape = new Circle()
+    } else if (answers.shape === 'square') {
+        userShape = new Square()
+    } else if (answers.shape === 'triangle') {
+        userShape = new Triangle()
+    } else (
+        console.log('Invalid, choose a shape')
+    )
+
+    userShape.setColor(shapeColor)
+}
 // const shape = new Triangle();
 // shape.setColor("blue");
 // expect(shape.render()).toEqual('<polygon points="150, 18 244, 182 56, 182" fill="blue" />');
