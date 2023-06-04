@@ -13,60 +13,44 @@
 // WHEN I open the `logo.svg` file in a browser
 // THEN I am shown a 300x200 pixel image that matches the criteria I entered
 
-const express = require(inquirer);
-const path = require('path');
+const inquirer = require('inquirer');
 const files = require('fs')
-const {Circle, Square, Triangle} = require('./lib/shapes')
-
-
-// class Svg {
-//     constructor() {
-//         this.textElement = '';
-//         this.shapeElement = '';
-//     }
-//     render() {
-//         return `svg version = '1.1` xmlns =
-//     }
-//     setTextElement(text, color) {
-//         this.textElement = `<text x='150' y='125' font-size='30' fill='${color}'>${this.textElement}
-//     }
-// }
-
-
-const app = express()
+const { Circle, Square, Triangle } = require('./lib/shapes')
+   
 
 const questions = [
-{
-    type: 'input',
-    name: 'text',
-    message: 'Enter three characters or less', 
-    validate: (textChoice) =>
-    textChoice.length <= 3 || 'Text must be 3 characters or less'
-},
+    {
+        type: 'input',
+        name: 'text',
+        message: 'Enter three characters or less',
+        validate: (textChoice) =>
+            textChoice.length <= 3 || 'Text must be 3 characters or less'
+    },
 
-{
-    type: 'input',
-    name: 'text-color',
-    message: 'Choose a text color or hexadecimal number:' 
-},
+    {
+        type: 'input',
+        name: 'text-color',
+        message: 'Choose a text color or hexadecimal number:'
+    },
 
-{
-    type: 'input',
-    name: 'shape-color',
-    message: 'Enter three characters or less' 
-}
+    {
+        type: 'input',
+        name: 'shape-color',
+        message: 'Enter three characters or less'
+    },
 
-{
-    type: 'list',
-    name: 'shape',
-    message: 'Chose a shape',
-    choices: ('Circle', 'Square', 'Triangle')
-}
+    {
+        type: 'list',
+        name: 'shape',
+        message: 'Chose a shape',
+        choices: ('Circle', 'Square', 'Triangle')
+    }
 ]
 
 function writeFile(fileName, data) {
     files.writeFile(fileName, data, (err) => {
-        if (err) throw error
+        if(err) 
+        console.log(err)
     })
 }
 async function init() {
@@ -96,4 +80,5 @@ async function init() {
 
     userShape.setColor(shapeColor)
 }
-writeFile();
+
+init()
