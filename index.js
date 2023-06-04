@@ -13,7 +13,7 @@
 // WHEN I open the `logo.svg` file in a browser
 // THEN I am shown a 300x200 pixel image that matches the criteria I entered
 
-const express = require('express');
+const express = require(inquirer);
 const path = require('path');
 const files = require('fs')
 const {Circle, Square, Triangle} = require('./lib/shapes')
@@ -60,7 +60,7 @@ const questions = [
     type: 'list',
     name: 'shape',
     message: 'Chose a shape',
-    choices: ('Circle', 'Sqaure', 'Triangle')
+    choices: ('Circle', 'Square', 'Triangle')
 }
 ]
 
@@ -96,6 +96,4 @@ async function init() {
 
     userShape.setColor(shapeColor)
 }
-// const shape = new Triangle();
-// shape.setColor("blue");
-// expect(shape.render()).toEqual('<polygon points="150, 18 244, 182 56, 182" fill="blue" />');
+writeFile();
